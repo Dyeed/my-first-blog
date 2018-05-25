@@ -4,7 +4,7 @@ myvenv
 venv
 db.sqlite3
 .DS_Store
-.ieda/
+.idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
