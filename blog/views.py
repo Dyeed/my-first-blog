@@ -3,6 +3,7 @@ from .models import Post
 from django.utils import timezone
 from .forms import PostForm, CommentForm, Comment
 from django.contrib.auth.decorators import login_required
+import markdown,pygments
 
 
 def post_list(request):
@@ -12,6 +13,12 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    post.text = markdown.markdown(post.text,
+                                  extensions=[
+                                      'markdown.extensions.extra',
+                                      'markdown.extensions.codehilite',
+                                      'markdown.extensions.toc',
+                                  ])
     return render(request, 'blog/post_detail.html', {'post': post, })
 
 
