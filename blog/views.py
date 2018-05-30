@@ -3,7 +3,7 @@ from .models import Post
 from django.utils import timezone
 from .forms import PostForm, CommentForm, Comment
 from django.contrib.auth.decorators import login_required
-import markdown,pygments
+import markdown
 
 
 def post_list(request):

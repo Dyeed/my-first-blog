@@ -12,6 +12,8 @@ $virtualenv --python=python3.6 myvenv
 (mvenv) $  pip install django whitenoise
 
 Django==2.0.5
+Markdown==2.6.11
+Pygments==2.2.0
 whitenoise==3.3.1
 
 ```
@@ -39,7 +41,8 @@ whitenoise==3.3.1
 
 # To-Do
 - [ ] 界面-使用新的UI界面
-- [ ] 功能-博文Markdown支持
+- [x] 功能-博文Markdown支持
 - [ ] 功能-时间线
 - [ ] 模型-增加博文栏目（分类）、点赞
+- [ ] 全文搜索|标题搜索
 - [ ] 。。。
