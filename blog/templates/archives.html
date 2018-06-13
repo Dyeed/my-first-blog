@@ -1,6 +1,14 @@
+{% load blog_tags %}
+{% get_archives as achs %}
 <div class="widget widget-archives">
     <h3 class="widget-title">归档</h3>
     <ul>
+        {% for ach in achs %}
+        <li>
+            <a href="#">{{ ach.year }} 年 {{ ach.month }} 月</a>
+        </li>
+        {% endfor %}
+
         <li>
             <a href="#">2017 年 5 月</a>
         </li>

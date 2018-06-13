@@ -21,7 +21,7 @@ def post_detail(request, pk):
     """
     博客详情
     :param request:
-    :param pk:
+    :param pk: (?P<pk>[0-9]+)
     :return:
     """
     post = get_object_or_404(Post, pk=pk)
@@ -31,7 +31,7 @@ def post_detail(request, pk):
                                       'markdown.extensions.codehilite',
                                       'markdown.extensions.toc',
                                   ])
-    return render(request, 'blog/post_detail.html', {'post': post, })
+    return render(request, 'blog/detail.html', {'post': post, })
 
 
 @login_required
