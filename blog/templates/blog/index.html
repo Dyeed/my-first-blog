@@ -1,0 +1,69 @@
+{% extends 'blog/basenew.html' %}
+
+{% block main_index %}
+    {% for post in posts %}
+        <article class="post post-{{ post.pk }}">
+            <header class="entry-header">
+                <h1 class="entry-title">
+                    <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+                </h1>
+                <div class="entry-meta">
+                    <span class="post-category"><a href="/category/{{ post.category.name }}">{{ post.category.name }}</a></span>
+                    <span class="post-date"><a href="#"><time class="entry-date"
+                                                              datetime="{{ post.created_date }}">{{ post.created_date }}</time></a></span>
+                    <span class="post-author"><a href="#">{{ post.author }}</a></span>
+                    <span class="comments-link"><a href="#">{{ post.comments.count }}评论</a></span>
+                    <span class="views-count"><a href="#">588 阅读</a></span>
+                </div>
+            </header>
+            <div class="entry-content clearfix">
+                <p>{{ post.text|linebreaksbr|truncatechars:300 }}</p>
+                {# 替换摘要 <p>{{ post.excerpt }}</p>#}
+                <div class="read-more cl-effect-14">
+                    <a href="{% url 'post_detail' pk=post.pk %}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+                </div>
+            </div>
+        </article>
+    {% empty %}
+        <div class="no-post">暂时还没有发布的文章！</div>
+    {% endfor %}
+
+{#    <!-- 简单分页效果#}
+    <div class="pagination-simple">
+        <a href="#">上一页</a>
+        <span class="current">第 6 页 / 共 11 页</span>
+        <a href="#">下一页</a>
+    </div>
+{#    -->#}
+{#    <div class="pagination">#}
+{#        <ul>#}
+{#            <li><a href="">1</a></li>#}
+{#            <li><a href="">...</a></li>#}
+{#            <li><a href="">4</a></li>#}
+{#            <li><a href="">5</a></li>#}
+{#            <li class="current"><a href="">6</a></li>#}
+{#            <li><a href="">7</a></li>#}
+{#            <li><a href="">8</a></li>#}
+{#            <li><a href="">...</a></li>#}
+{#            <li><a href="">11</a></li>#}
+{#        </ul>#}
+{#    </div>#}
+{% endblock %}
+
+{% block aside_right %}
+    <!-- 最近文章 -->
+    {% include 'recent_posts.html' %}
+    <!-- 归档 -->
+    {% include 'archives.html' %}
+    <!-- 分类 -->
+    {% include 'category.html' %}
+    <!-- 标签云 -->
+    {% include 'tag_cloud.html' %}
+    <!-- RSS -->
+    <div class="rss">
+        <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+    </div>
+{% endblock %}
+{% block addjs %}
+    <script>var a_idx=0;jQuery(document).ready(function($){$("body").click(function(e){var a=new Array("富强","民主","文明","和谐","自由","平等","公正","法治","爱国","敬业","诚信","友善");var $i=$("<span/>").text(a[a_idx]);a_idx=(a_idx+1)%a.length;var x=e.pageX,y=e.pageY;$i.css({"z-index":999999999999999999999999999999999999999999999999999999999999999999999,"top":y-20,"left":x,"position":"absolute","font-weight":"bold","color":"#ff4d39"});$("body").append($i);$i.animate({"top":y-180,"opacity":0},1500,function(){$i.remove();});});});</script>
+{% endblock %}

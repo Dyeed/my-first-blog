@@ -7,11 +7,23 @@ import markdown
 
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts, })
+    """
+    博客列表
+    :param request:
+    :return:
+    """
+    # 根据发布时间逆序排列
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+    return render(request, 'blog/index.html', {'posts': posts, })
 
 
 def post_detail(request, pk):
+    """
+    博客详情
+    :param request:
+    :param pk:
+    :return:
+    """
     post = get_object_or_404(Post, pk=pk)
     post.text = markdown.markdown(post.text,
                                   extensions=[
@@ -24,6 +36,11 @@ def post_detail(request, pk):
 
 @login_required
 def post_new(request):
+    """
+    新建博客页
+    :param request:
+    :return:
+    """
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -70,7 +87,7 @@ def post_publish(request, pk):
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
-    return redirect('post_list')
+    return redirect('index')
 
 
 def add_comment_to_post(request, pk):

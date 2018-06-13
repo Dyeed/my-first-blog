@@ -1,0 +1,10 @@
+<div class="widget widget-recent-posts">
+    <h3 class="widget-title">最新文章</h3>
+    <ul>
+        {% for post in posts %}
+            {% if forloop.counter < 4 %}
+                <li><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title|truncatechars:20 }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
