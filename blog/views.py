@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post
+from .models import Post, Category
 from django.utils import timezone
 from .forms import PostForm, CommentForm, Comment
 from django.contrib.auth.decorators import login_required
@@ -18,9 +18,28 @@ def post_list(request):
 
 
 def archives(request, year, month):
+    """
+    归档页
+    :param request:
+    :param year:
+    :param month:
+    :return:
+    """
     posts = Post.objects.filter(created_date__year=year,
                                 created_date__month=month,
                                 ).order_by('-created_date')
+    return render(request, 'blog/index.html', context={'posts': posts})
+
+
+def category(request, pk):
+    """
+    分类页
+    :param request:
+    :param pk:
+    :return:
+    """
+    cate = get_object_or_404(Category, pk=pk)
+    posts = Post.objects.filter(category=cate).order_by('-created_date')
     return render(request, 'blog/index.html', context={'posts': posts})
 
 
