@@ -5,18 +5,8 @@
     <ul>
         {% for ach in achs %}
         <li>
-            <a href="#">{{ ach.year }} 年 {{ ach.month }} 月</a>
+            <a href="{% url 'archives' year=ach.year month=ach.month %}">{{ ach.year }} 年 {{ ach.month }} 月</a>
         </li>
         {% endfor %}
-
-        <li>
-            <a href="#">2017 年 5 月</a>
-        </li>
-        <li>
-            <a href="#">2017 年 4 月</a>
-        </li>
-        <li>
-            <a href="#">2017 年 3 月</a>
-        </li>
     </ul>
 </div>

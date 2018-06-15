@@ -8,13 +8,20 @@ import markdown
 
 def post_list(request):
     """
-    博客列表
+    博客列表|首页
     :param request:
     :return:
     """
     # 根据发布时间逆序排列
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'blog/index.html', {'posts': posts, })
+
+
+def archives(request, year, month):
+    posts = Post.objects.filter(created_date__year=year,
+                                created_date__month=month,
+                                ).order_by('-created_date')
+    return render(request, 'blog/index.html', context={'posts': posts})
 
 
 def post_detail(request, pk):
