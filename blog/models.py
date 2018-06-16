@@ -69,13 +69,21 @@ class Post(models.Model):
 class Comment(models.Model):
     """
     评论
-
+    author：作者
+    email：邮箱
+    text：评论内容
+    created_date：创建（提交）日期
+    approved_comment：审核发布
+    post：外键，关联博文表
     """
-    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(max_length=200)
+    email = models.EmailField(max_length=254)
     text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
+    # created_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(auto_now_add=True)
     approved_comment = models.BooleanField(default=False)
+
+    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
 
     def approve(self):
         """
