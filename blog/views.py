@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Category
+from .models import Post, Category, Comment
 from django.utils import timezone
-from .forms import PostForm, CommentForm, Comment
+from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 import markdown
 
@@ -57,7 +57,13 @@ def post_detail(request, pk):
                                       'markdown.extensions.codehilite',
                                       'markdown.extensions.toc',
                                   ])
-    return render(request, 'blog/detail.html', {'post': post, })
+    form = CommentForm()
+    comment_list = post.comments.all()
+    context = {'post': post,
+               'form': form,
+               'comment_list': comment_list
+               }
+    return render(request, 'blog/detail.html', context=context)
 
 
 @login_required
@@ -125,8 +131,15 @@ def add_comment_to_post(request, pk):
             comment.post = post
             comment.save()
             return redirect('post_detail', pk=post.pk)
-    else:
-        form = CommentForm()
+            # return redirect('post_detail')
+        else:
+            comment_list = post.comments.all()
+            context = {'post': post,
+                       'form': form,
+                       'comment_list': comment_list
+                       }
+            return render(request, 'blog/detail.html', context=context)
+        # form = CommentForm()
     return render(request, 'blog/add_comment_to_post.html', {'form': form})
 
 

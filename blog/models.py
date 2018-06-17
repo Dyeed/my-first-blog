@@ -62,6 +62,9 @@ class Post(models.Model):
         """
         return self.comments.filter(approved_comment=True)
 
+    def get_absolute_url(self):
+        return '/post/{}/'.format(self.pk)
+
     def __str__(self):
         return self.title
 

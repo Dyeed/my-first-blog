@@ -25,7 +25,7 @@ SECRET_KEY = 'm)qm81=l_hwy0^-dn2af4#%#ao0#(qtss*hd@7qjbgvbh#evi)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dyeed.pythonanywhere.com','127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
