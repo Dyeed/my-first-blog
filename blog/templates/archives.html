@@ -4,9 +4,11 @@
     <h3 class="widget-title">归档</h3>
     <ul>
         {% for ach in achs %}
-        <li>
-            <a href="{% url 'archives' year=ach.year month=ach.month %}">{{ ach.year }} 年 {{ ach.month }} 月</a>
-        </li>
+            <li>
+                <a href="{% url 'archives' year=ach.year month=ach.month %}">{{ ach.year }} 年 {{ ach.month }} 月</a>
+            </li>
+        {% empty %}
+            NONE
         {% endfor %}
     </ul>
 </div>

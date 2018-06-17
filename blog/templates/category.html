@@ -8,6 +8,8 @@
             <li>
                 <a href="{% url 'category' cate.pk %}">{{ cate.name }} <span class="post-count">(13)</span></a>
             </li>
+        {% empty %}
+            NONE
         {% endfor %}
     </ul>
 </div>
