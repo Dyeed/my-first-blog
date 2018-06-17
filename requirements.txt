@@ -1,5 +1,6 @@
 Django==2.0.5
 Markdown==2.6.11
 Pygments==2.2.0
+PyMySQL==0.8.1
 pytz==2018.4
 whitenoise==3.3.1

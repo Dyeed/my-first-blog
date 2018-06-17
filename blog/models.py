@@ -43,6 +43,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
+    views = models.PositiveIntegerField(default=0)
     excerpt = models.CharField(max_length=200, blank=True)
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE)
@@ -64,6 +65,13 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return '/post/{}/'.format(self.pk)
+
+    def increase_views(self):
+        """
+        增加阅读量
+        """
+        self.views += 1
+        self.save(update_fields=['views'])
 
     def __str__(self):
         return self.title
