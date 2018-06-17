@@ -17,8 +17,9 @@
                 </div>
             </header>
             <div class="entry-content clearfix">
-                <p>{{ post.text|linebreaksbr|truncatechars:300 }}</p>
-                {# 替换摘要 <p>{{ post.excerpt }}</p>#}
+{#                <p>{{ post.text|linebreaksbr|truncatechars:300 }}</p>#}
+{#                <p>{{ post.text|striptags|truncatewords_html:256|linebreaksbr }}</p>#}
+                  <p>{{ post.excerpt }}</p>
                 <div class="read-more cl-effect-14">
                     <a href="{% url 'post_detail' pk=post.pk %}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
                 </div>

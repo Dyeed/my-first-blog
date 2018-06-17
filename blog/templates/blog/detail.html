@@ -27,12 +27,12 @@
         <form action="{% url 'add_comment_to_post' post.pk %}" method="post" class="comment-form">
             {% csrf_token %}
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="{{ form.author.id_for_label }}">名字：</label>
                     {{ form.author }}
                     {{ form.author.errors }}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="{{ form.email.id_for_label }}">邮箱：</label>
                     {{ form.email }}
                     {{ form.email.errors }}
@@ -72,7 +72,7 @@
 
 {% block aside_right %}
     <!-- 目录 -->
-    <div class="widget widget-content">
+    <div class="hidden-xs widget widget-content">
         <h3 class="widget-title">文章目录</h3>
         <ul>
             <li>

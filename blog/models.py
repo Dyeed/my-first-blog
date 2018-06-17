@@ -1,5 +1,7 @@
+import markdown
 from django.db import models
 from django.utils import timezone
+from django.utils.html import strip_tags
 
 
 class Category(models.Model):
@@ -72,6 +74,19 @@ class Post(models.Model):
         """
         self.views += 1
         self.save(update_fields=['views'])
+
+    def save(self, *args, **kwargs):
+        if not self.excerpt:
+            # 实例化 Markdown ，用于渲染 body 的文本
+            md = markdown.Markdown(extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite',
+            ])
+            # 先将 Markdown 文本渲染成 HTML 文本
+            # strip_tags 去掉 HTML 文本的全部 HTML 标签
+            self.excerpt = strip_tags(md.convert(self.text))[:54]
+
+        super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title

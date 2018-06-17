@@ -685,7 +685,7 @@ img {
     border: 1px solid #aaa;
     margin-bottom: 15px;
     width: 100%;
-    padding: 15px 15px;
+    padding: 5px 5px;
     font-size: 16px;
     line-height: 100%;
     transition: 0.4s border-color linear;
@@ -698,7 +698,7 @@ img {
     padding: 15px 15px;
     font-size: 16px;
     line-height: 20px !important;
-    min-height: 183px;
+    min-height: 120px;
     transition: 0.4s border-color linear;
 }
 
