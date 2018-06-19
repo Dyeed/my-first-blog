@@ -8,16 +8,11 @@ Django Web
 
 环境
 ```
-$virtualenv --python=python3.6 myvenv
-(mvenv) $  pip install django whitenoise
-
-Django==2.0.5
-Markdown==2.6.11
-Pygments==2.2.0
-whitenoise==3.3.1
-
+$virtualenv --python=python3 myvenv
+()$pip install -r requirements.txt
 ```
 # 功能
+- 首页：逆序文章列表，最近文章、归档、分类、标签。。。
 - 创建、修改、删除博客
 - 创建、审核评论
 
@@ -40,9 +35,11 @@ whitenoise==3.3.1
 ```
 
 # To-Do
-- [ ] 界面-使用新的UI界面
+- [x] 界面-使用新的UI界面
 - [x] 功能-博文Markdown支持
 - [ ] 功能-时间线
-- [ ] 模型-增加博文栏目（分类）、点赞
+- [ ] 文章分类
+- [ ] 点赞
 - [ ] 全文搜索|标题搜索
+- [x] 文章归档
 - [ ] 。。。
