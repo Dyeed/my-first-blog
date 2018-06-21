@@ -52,6 +52,12 @@ class Post(models.Model):
     tags = models.ManyToManyField(to='Tag', blank=True)
     text = models.TextField()
 
+    class Meta:
+        """
+        排序
+        """
+        ordering = ['-created_date']
+
     def published(self):
         """
         发布（时间）
