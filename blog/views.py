@@ -3,6 +3,7 @@ from .models import Post, Category, Comment
 from django.utils import timezone
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
 import markdown
 
 
@@ -13,8 +14,18 @@ def post_list(request):
     :return:
     """
     # 根据发布时间逆序排列
+    # **已在模型中处理
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'blog/index.html', {'posts': posts, })
+
+
+class IndexView(ListView):
+    """首页
+    CBV替代post_list()
+    """
+    model = Post
+    template_name = 'blog/index.html'
+    context_object_name = 'posts'
 
 
 def archives(request, year, month):
@@ -31,6 +42,17 @@ def archives(request, year, month):
     return render(request, 'blog/index.html', context={'posts': posts})
 
 
+# 继承自IndexView
+class ArchivesView(IndexView):
+    """
+    CBV替代category()
+    """
+
+    def get_queryset(self):
+        year, month = self.kwargs.get('year'), self.kwargs.get('month')
+        return super(ArchivesView, self).get_queryset().filter(created_date__year=year, created_date__month=month, )
+
+
 def category(request, pk):
     """
     分类页
@@ -41,6 +63,21 @@ def category(request, pk):
     cate = get_object_or_404(Category, pk=pk)
     posts = Post.objects.filter(category=cate).order_by('-created_date')
     return render(request, 'blog/index.html', context={'posts': posts})
+
+
+# 继承自IndexView
+class CategoryView(IndexView):
+    """
+    CBV替代category()
+    """
+
+    def get_queryset(self):
+        """
+        类视图中，从 URL 捕获的命名组参数值保存在实例的 kwargs 属性里，非命名组参数值保存在实例的 args 里
+        :return:
+        """
+        cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
+        return super(CategoryView, self).get_queryset().filter(category=cate)
 
 
 def post_detail(request, pk):
