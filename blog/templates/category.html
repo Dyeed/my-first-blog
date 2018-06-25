@@ -6,7 +6,7 @@
     <ul>
         {% for cate in cates %}
             <li>
-                <a href="{% url 'category' cate.pk %}">{{ cate.name }} <span class="post-count">(13)</span></a>
+                <a href="{% url 'category' cate.pk %}">{{ cate.name }} <span class="post-count">({{ cate.num_posts }})</span></a>
             </li>
         {% empty %}
             NONE
